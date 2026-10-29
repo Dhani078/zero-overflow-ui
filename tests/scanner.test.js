@@ -4,6 +4,8 @@ import path from "node:path";
 import { scanFile } from "../src/scanner.js";
 
 const tmpFile = path.resolve("./tests/fixture.html");
+const safeFile = path.resolve("./tests/safe.html");
+
 const sampleCode = `
 <div class="w-screen bg-black">
   <div class="w-[500px] flex">
@@ -16,9 +18,23 @@ const sampleCode = `
 </div>
 `;
 
+const safeCode = `
+<div class="w-full max-w-7xl mx-auto overflow-hidden">
+  <div class="w-full md:w-[500px] flex">
+    <span class="flex-1 min-w-0 truncate">Safe text</span>
+  </div>
+  <div class="w-full overflow-x-auto">
+    <table class="table-auto"><tr><td>Data</td></tr></table>
+  </div>
+  <div class="overflow-hidden"><div class="-mx-4">Clipped margin</div></div>
+</div>
+`;
+
 fs.writeFileSync(tmpFile, sampleCode);
+fs.writeFileSync(safeFile, safeCode);
 
 try {
+  // Test 1: Flag violations
   const issues = scanFile(tmpFile);
   assert.strictEqual(issues.length >= 4, true, `Expected >= 4 issues, got ${issues.length}`);
   const ruleIds = issues.map(i => i.ruleId);
@@ -26,7 +42,13 @@ try {
   assert.ok(ruleIds.includes("fixed-width-overflow"));
   assert.ok(ruleIds.includes("flex-truncate-leak"));
   assert.ok(ruleIds.includes("table-pre-unwrapped"));
-  console.log("All zero-overflow-ui tests passed!");
+
+  // Test 2: Safe templates must return 0 violations
+  const safeIssues = scanFile(safeFile);
+  assert.strictEqual(safeIssues.length, 0, `Expected 0 issues on safe markup, got ${safeIssues.length}`);
+
+  console.log("All zero-overflow-ui tests passed (Positive & Negative suites)!");
 } finally {
   if (fs.existsSync(tmpFile)) fs.unlinkSync(tmpFile);
+  if (fs.existsSync(safeFile)) fs.unlinkSync(safeFile);
 }

@@ -1,0 +1,7 @@
+- id: zero-overflow
+  name: zero-overflow-ui
+  description: Prevent mobile viewport horizontal overflow in frontend code
+  entry: npx zero-overflow scan
+  language: node
+  files: \.(html|jsx|tsx|vue|svelte|astro|php|blade\.php)$
+  pass_filenames: false

@@ -20,7 +20,7 @@ export function scanFile(filePath) {
     if (!line.trim() || line.trim().startsWith("//") || line.trim().startsWith("/*")) continue;
 
     for (const rule of RULES) {
-      const result = rule.check(line);
+      const result = rule.check(line, i, lines);
       if (result) {
         issues.push({
           file: filePath,

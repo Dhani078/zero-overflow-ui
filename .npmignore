@@ -1,0 +1,7 @@
+tests/
+docs/
+.github/
+.gitignore
+.git/
+.pre-commit-hooks.yaml
+SPEC.md
