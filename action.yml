@@ -1,0 +1,14 @@
+name: "zero-overflow-ui action"
+description: "Scan frontend templates for mobile horizontal overflow and viewport leakage"
+author: "Dhani078"
+inputs:
+  path:
+    description: "Directory or file to scan"
+    required: false
+    default: "src"
+runs:
+  using: "composite"
+  steps:
+    - name: Run zero-overflow scanner
+      shell: bash
+      run: node ${{ github.action_path }}/bin/zero-overflow.js scan ${{ inputs.path }}
