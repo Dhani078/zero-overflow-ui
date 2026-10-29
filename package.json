@@ -1,0 +1,43 @@
+{
+  "name": "zero-overflow-ui",
+  "version": "1.0.0",
+  "description": "Static code scanner preventing mobile horizontal overflow and viewport leakage in frontend code.",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "zero-overflow": "bin/zero-overflow.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "SKILL.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node tests/scanner.test.js",
+    "scan": "node bin/zero-overflow.js scan ."
+  },
+  "keywords": [
+    "zero-overflow",
+    "tailwind",
+    "css",
+    "mobile-first",
+    "responsive",
+    "linter",
+    "frontend-checklist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dhani078/zero-overflow-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Dhani078/zero-overflow-ui/issues"
+  },
+  "homepage": "https://github.com/Dhani078/zero-overflow-ui#readme",
+  "author": "Dhani078",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
