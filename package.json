@@ -17,8 +17,9 @@
     "LICENSE"
   ],
   "scripts": {
-    "test": "node tests/scanner.test.js",
-    "scan": "node bin/zero-overflow.js scan ."
+    "test": "node scripts/lint.js && node tests/scanner.test.js",
+    "scan": "node bin/zero-overflow.js scan .",
+    "lint": "node scripts/lint.js"
   },
   "keywords": [
     "zero-overflow",
