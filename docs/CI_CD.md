@@ -1,8 +1,8 @@
-**CI/CD Integration: zero-overflow-ui**
+CI/CD Integration: zero-overflow-ui
 
 Integrate `zero-overflow-ui` into your automated workflows.
 
-**1. GitHub Actions Workflow**
+1. GitHub Actions Workflow
 
 Create `.github/workflows/overflow-check.yml`:
 
@@ -27,7 +27,7 @@ jobs:
         run: npx zero-overflow scan src/
 ```
 
-**2. Pre-commit Hook (Husky / lint-staged)**
+2. Pre-commit Hook (Husky / lint-staged)
 
 Add to `.husky/pre-commit`:
 

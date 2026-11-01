@@ -1,52 +1,52 @@
-**API Reference**
+API Reference
 
 `zero-overflow-ui` provides a clean, zero-dependency Node.js API for programmatic scanning and viewport verification.
 
-**Installation**
+Installation
 
 ```bash
 npm install --save-dev zero-overflow-ui
 ```
 
-**Import**
+Import
 
 ```javascript
 import { scanFile, scanDirectory, loadConfig } from "zero-overflow-ui";
 ```
 
-**Functions**
+Functions
 
-**`loadConfig(cwd?: string): Config`**
+`loadConfig(cwd?: string): Config`
 Loads `.overflowrc.json` from the specified working directory if present.
 
-- **Parameters**: `cwd` (string, optional, defaults to `process.cwd()`)
-- **Returns**: `Config` object
+- Parameters: `cwd` (string, optional, defaults to `process.cwd()`)
+- Returns: `Config` object
 
 ```javascript
 const config = loadConfig();
 // { ignoreRules: ["w-screen"], ignorePaths: ["legacy/"] }
 ```
 
-**`scanFile(filePath: string, config?: Config): IssueResult[]`**
+`scanFile(filePath: string, config?: Config): IssueResult[]`
 Scans a single file against all active overflow rules.
 
-- **Parameters**:
+- Parameters:
   - `filePath` (string): Absolute or relative path to target file
   - `config` (Config, optional): Configuration overrides
-- **Returns**: Array of `IssueResult` objects
+- Returns: Array of `IssueResult` objects
 
 ```javascript
 const issues = scanFile("src/components/Header.jsx");
 console.log(issues);
 ```
 
-**`scanDirectory(dirPath: string, config?: Config): IssueResult[]`**
+`scanDirectory(dirPath: string, config?: Config): IssueResult[]`
 Recursively traverses a directory and scans all supported frontend files (`.html`, `.jsx`, `.tsx`, `.vue`, `.svelte`, `.astro`, `.php`, `.blade.php`).
 
-- **Parameters**:
+- Parameters:
   - `dirPath` (string): Path to root directory
   - `config` (Config, optional): Configuration overrides
-- **Returns**: Array of `IssueResult` objects
+- Returns: Array of `IssueResult` objects
 
 ```javascript
 const issues = scanDirectory("src/", {
@@ -55,9 +55,9 @@ const issues = scanDirectory("src/", {
 });
 ```
 
-**Types**
+Types
 
-**`IssueResult`**
+`IssueResult`
 ```typescript
 interface IssueResult {
   file: string;
@@ -72,7 +72,7 @@ interface IssueResult {
 }
 ```
 
-**`Config`**
+`Config`
 ```typescript
 interface Config {
   ignoreRules?: string[];

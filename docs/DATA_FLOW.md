@@ -1,8 +1,8 @@
-**Data Flow Architecture: zero-overflow-ui**
+Data Flow Architecture: zero-overflow-ui
 
 Detailed breakdown of data transformations and token state machines in `zero-overflow-ui`.
 
-**1. Pipeline Stages**
+1. Pipeline Stages
 
 ```mermaid
 stateDiagram-v2
@@ -17,7 +17,7 @@ stateDiagram-v2
     ReportFormatter --> [*] : console / JSON exit
 ```
 
-**2. Token Matching State Machine**
+2. Token Matching State Machine
 
 When `scanFile` evaluates a source file:
 
@@ -45,9 +45,9 @@ When `scanFile` evaluates a source file:
                └─ Unclipped negative margin? ──► Emit negative-margin-leak (WARNING)
 ```
 
-**3. Data Structures**
+3. Data Structures
 
-**Line Context Window**
+Line Context Window
 Rules like `flex-truncate-leak` and `table-pre-unwrapped` consume contextual sibling lines:
-- **Lookback Window**: $N - 1$ inspection for table/code parent containers.
-- **Lookaround Window**: Scanning parent and sibling flex declarations across adjacent lines.
+- Lookback Window: $N - 1$ inspection for table/code parent containers.
+- Lookaround Window: Scanning parent and sibling flex declarations across adjacent lines.

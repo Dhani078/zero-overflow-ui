@@ -1,20 +1,20 @@
-**Examples**
+Examples
 
 Real-world before-and-after patterns detected and solved by `zero-overflow-ui`.
 
 ---
 
-**Example 1: Fullscreen Layout (w-screen vs w-full)**
+Example 1: Fullscreen Layout (w-screen vs w-full)
 
-**Anti-pattern**
+Anti-pattern
 ```html
 <header class="w-screen bg-slate-900 text-white p-4">
   <nav class="flex justify-between">...</nav>
 </header>
 ```
-*Why it fails*: `100vw` (`w-screen`) includes browser scrollbar width on desktop and mobile, producing a 15px-17px horizontal overflow.
+Why it fails: `100vw` (`w-screen`) includes browser scrollbar width on desktop and mobile, producing a 15px-17px horizontal overflow.
 
-**Recommended Fix**
+Recommended Fix
 ```html
 <header class="w-full bg-slate-900 text-white p-4">
   <nav class="flex justify-between">...</nav>
@@ -23,9 +23,9 @@ Real-world before-and-after patterns detected and solved by `zero-overflow-ui`.
 
 ---
 
-**Example 2: Hero Card Container**
+Example 2: Hero Card Container
 
-**Anti-pattern**
+Anti-pattern
 ```jsx
 export function PricingCard() {
   return (
@@ -35,9 +35,9 @@ export function PricingCard() {
   );
 }
 ```
-*Why it fails*: A mobile screen with 375px width will trigger horizontal scrolling.
+Why it fails: A mobile screen with 375px width will trigger horizontal scrolling.
 
-**Recommended Fix**
+Recommended Fix
 ```jsx
 export function PricingCard() {
   return (
@@ -50,9 +50,9 @@ export function PricingCard() {
 
 ---
 
-**Example 3: Flex Avatar + Truncated Name**
+Example 3: Flex Avatar + Truncated Name
 
-**Anti-pattern**
+Anti-pattern
 ```html
 <div class="flex items-center gap-3">
   <img src="avatar.jpg" class="h-10 w-10 rounded-full" />
@@ -61,9 +61,9 @@ export function PricingCard() {
   </div>
 </div>
 ```
-*Why it fails*: Inner `flex-col` defaults to `min-w-auto`, preventing `truncate` from applying `text-overflow: ellipsis`.
+Why it fails: Inner `flex-col` defaults to `min-w-auto`, preventing `truncate` from applying `text-overflow: ellipsis`.
 
-**Recommended Fix**
+Recommended Fix
 ```html
 <div class="flex items-center gap-3">
   <img src="avatar.jpg" class="h-10 w-10 rounded-full shrink-0" />

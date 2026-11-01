@@ -1,6 +1,6 @@
-**Security Policy**
+Security Policy
 
-**Supported Versions**
+Supported Versions
 
 Only the latest major version receives security updates.
 
@@ -9,7 +9,7 @@ Only the latest major version receives security updates.
 | 1.x     | :white_check_mark: |
 | < 1.0   | :x:                |
 
-**Reporting a Vulnerability**
+Reporting a Vulnerability
 
 Please do not open public GitHub issues for security vulnerabilities. Instead, report security issues via email to `dhanisepeda@gmail.com`.
 
