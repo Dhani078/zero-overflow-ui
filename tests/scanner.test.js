@@ -1,10 +1,11 @@
 import assert from "node:assert";
 import fs from "node:fs";
 import path from "node:path";
-import { scanFile } from "../src/scanner.js";
+import { scanFile, scanDirectory, loadConfig } from "../src/scanner.js";
 
 const tmpFile = path.resolve("./tests/fixture.html");
 const safeFile = path.resolve("./tests/safe.html");
+const bladeFile = path.resolve("./tests/component.blade.php");
 
 const sampleCode = `
 <div class="w-screen bg-black">
@@ -30,8 +31,15 @@ const safeCode = `
 </div>
 `;
 
+const bladeCode = `
+<div class="w-screen">
+  {{ $slot }}
+</div>
+`;
+
 fs.writeFileSync(tmpFile, sampleCode);
 fs.writeFileSync(safeFile, safeCode);
+fs.writeFileSync(bladeFile, bladeCode);
 
 try {
   // Test 1: Flag violations
@@ -47,8 +55,27 @@ try {
   const safeIssues = scanFile(safeFile);
   assert.strictEqual(safeIssues.length, 0, `Expected 0 issues on safe markup, got ${safeIssues.length}`);
 
-  console.log("All zero-overflow-ui tests passed (Positive & Negative suites)!");
+  // Test 3: Laravel Blade template scanning
+  const bladeIssues = scanFile(bladeFile);
+  assert.strictEqual(bladeIssues.length, 1);
+  assert.strictEqual(bladeIssues[0].ruleId, "viewport-width-leak");
+
+  // Test 4: Ignore rules via config
+  const filtered = scanFile(tmpFile, { ignoreRules: ["viewport-width-leak", "fixed-width-overflow"] });
+  const filteredIds = filtered.map(i => i.ruleId);
+  assert.strictEqual(filteredIds.includes("viewport-width-leak"), false);
+  assert.strictEqual(filteredIds.includes("fixed-width-overflow"), false);
+
+  // Test 5: Commented lines ignored
+  const commentFile = path.resolve("./tests/comment.html");
+  fs.writeFileSync(commentFile, "<!-- <div class='w-screen'> -->\n// const w = 'w-screen';");
+  const commentIssues = scanFile(commentFile);
+  fs.unlinkSync(commentFile);
+  assert.strictEqual(commentIssues.length, 0);
+
+  console.log("All zero-overflow-ui tests passed (Positive, Negative & Edge suites)!");
 } finally {
   if (fs.existsSync(tmpFile)) fs.unlinkSync(tmpFile);
   if (fs.existsSync(safeFile)) fs.unlinkSync(safeFile);
+  if (fs.existsSync(bladeFile)) fs.unlinkSync(bladeFile);
 }

@@ -30,7 +30,10 @@ export function scanFile(filePath, config = {}) {
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
-    if (!line.trim() || line.trim().startsWith("//") || line.trim().startsWith("/*")) continue;
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("//") || trimmed.startsWith("/*") || trimmed.startsWith("<!--")) {
+      continue;
+    }
 
     for (const rule of RULES) {
       if (ignoredRules.has(rule.id)) continue;
@@ -45,7 +48,7 @@ export function scanFile(filePath, config = {}) {
           token: result.token,
           detail: result.detail || rule.description,
           fix: rule.fix,
-          snippet: line.trim()
+          snippet: trimmed
         });
       }
     }
