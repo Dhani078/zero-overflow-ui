@@ -90,7 +90,7 @@ Add to `.pre-commit-config.yaml`:
 ```yaml
 repos:
   - repo: https://github.com/Dhani078/zero-overflow-ui
-    rev: v1.0.0
+    rev: v1.0.1
     hooks:
       - id: zero-overflow
 ```
@@ -100,7 +100,11 @@ repos:
 ## Documentation
 
 * [Specification](SPEC.md)
-* [Architecture & Design](docs/ARCHITECTURE.md)
+* [Architecture & C4 Model](docs/ARCHITECTURE.md)
+* [Data Flow Architecture](docs/DATA_FLOW.md)
+* [Security Model & ReDoS Resistance](docs/SECURITY_MODEL.md)
+* [Framework Compatibility Matrix](docs/FRAMEWORK_COMPATIBILITY_MATRIX.md)
+* [Performance Profiling & JIT Data](docs/PERFORMANCE_PROFILING.md)
 * [API Reference](docs/API_REFERENCE.md)
 * [CLI Usage Guide](docs/CLI_USAGE.md)
 * [Integration Guide](docs/INTEGRATION_GUIDE.md)
