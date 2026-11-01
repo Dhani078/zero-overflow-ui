@@ -4,7 +4,11 @@ import path from "node:path";
 import fs from "node:fs";
 import { scanFile, scanDirectory, loadConfig } from "../src/scanner.js";
 
-const args = process.argv.slice(2);
+const rawArgs = process.argv.slice(2);
+const isJson = rawArgs.includes("--json");
+const isQuiet = rawArgs.includes("-q") || rawArgs.includes("--quiet");
+const args = rawArgs.filter(a => !a.startsWith("-"));
+
 const command = args[0] || "scan";
 const targetPath = args[1] || ".";
 
@@ -13,12 +17,17 @@ function printUsage() {
 zero-overflow-ui - Static scanner preventing mobile horizontal overflow.
 
 Usage:
-  npx zero-overflow scan [dir|file]
+  npx zero-overflow scan [dir|file] [options]
   npx zero-overflow --help
+
+Options:
+  --json     Output scan results as JSON
+  -q, --quiet Only log when errors are discovered
+  -h, --help Show this help message
 `);
 }
 
-if (args.includes("-h") || args.includes("--help")) {
+if (rawArgs.includes("-h") || rawArgs.includes("--help")) {
   printUsage();
   process.exit(0);
 }
@@ -32,22 +41,37 @@ if (!fs.existsSync(resolvedPath)) {
 
 const config = loadConfig(process.cwd());
 const stat = fs.statSync(resolvedPath);
-console.log(`\nScanning for viewport overflow in: ${resolvedPath}`);
+if (!isJson && !isQuiet) {
+  console.log(`\nScanning for viewport overflow in: ${resolvedPath}`);
+}
 
 const issues = stat.isDirectory()
   ? scanDirectory(resolvedPath, config)
   : scanFile(resolvedPath, config);
 
+const errorsCount = issues.filter(i => i.severity === "error").length;
+
+if (isJson) {
+  console.log(JSON.stringify({
+    target: resolvedPath,
+    total: issues.length,
+    errors: errorsCount,
+    warnings: issues.length - errorsCount,
+    issues
+  }, null, 2));
+  process.exit(errorsCount > 0 ? 1 : 0);
+}
+
 if (issues.length === 0) {
-  console.log("\x1b[32m✔ 0 horizontal overflow issues detected. Clean viewport.\x1b[0m\n");
+  if (!isQuiet) {
+    console.log("\x1b[32m✔ 0 horizontal overflow issues detected. Clean viewport.\x1b[0m\n");
+  }
   process.exit(0);
 }
 
 console.log(`\x1b[31mFound ${issues.length} potential overflow issue(s):\x1b[0m\n`);
 
-let errorsCount = 0;
 for (const issue of issues) {
-  if (issue.severity === "error") errorsCount++;
   const color = issue.severity === "error" ? "\x1b[31m" : "\x1b[33m";
   console.log(`${color}[${issue.severity.toUpperCase()}]\x1b[0m ${issue.file}:${issue.line}`);
   console.log(`  Rule   : ${issue.name} (${issue.ruleId})`);
