@@ -1,10 +1,10 @@
-# Architecture: zero-overflow-ui
+**Architecture: zero-overflow-ui**
 
 `zero-overflow-ui` implements a zero-dependency, single-pass static scanner designed to eliminate horizontal viewport overflow on compact mobile devices (viewports < 360px).
 
-## 1. C4 Architecture Model
+**1. C4 Architecture Model**
 
-### Level 1: System Context Diagram
+**Level 1: System Context Diagram**
 
 ```mermaid
 flowchart TD
@@ -15,7 +15,7 @@ flowchart TD
     CLI -->|JSON / Text Report| Console[STDOUT / CI Log]
 ```
 
-### Level 2: Container Diagram
+**Level 2: Container Diagram**
 
 ```mermaid
 flowchart TD
@@ -32,7 +32,7 @@ flowchart TD
     Scanner --> FS[(Source Files)]
 ```
 
-### Level 3: Component Diagram
+**Level 3: Component Diagram**
 
 ```mermaid
 flowchart TD
@@ -57,7 +57,7 @@ flowchart TD
     K -->|WARNING| M[Exit 0]
 ```
 
-## 2. Sequence Diagram (Execution Flow)
+**2. Sequence Diagram (Execution Flow)**
 
 ```mermaid
 sequenceDiagram
@@ -85,9 +85,9 @@ sequenceDiagram
     CLI->>Dev: Print colorized summary & return exit code (0 or 1)
 ```
 
-## 3. Mathematical & Layout Invariants
+**3. Mathematical & Layout Invariants**
 
-### Mobile Viewport Inequality
+**Mobile Viewport Inequality**
 Modern compact mobile devices specify a logical viewport width:
 
 $$W_{\text{viewport}} \in [360\text{px}, 390\text{px}]$$
@@ -98,7 +98,7 @@ $$W_{\text{elem}} \ge 360\text{px}$$
 
 violates the containment boundary unless qualified by a responsive media query breakpoint ($M \in \{\text{sm}, \text{md}, \text{lg}, \text{xl}\}$).
 
-### Scrollbar Width Invariant (`w-screen`)
+**Scrollbar Width Invariant (`w-screen`)**
 Tailwind `w-screen` resolves to `width: 100vw`. In standard CSS box models:
 
 $$100\text{vw} = W_{\text{viewport}} + W_{\text{scrollbar}}$$
@@ -109,7 +109,7 @@ $$W_{\text{rendered}} > W_{\text{client}}$$
 
 which triggers involuntary horizontal scrolling. `zero-overflow-ui` enforces replacing `w-screen` with `w-full`.
 
-## 4. Complexity & Performance
+**4. Complexity & Performance**
 
 - **Time Complexity**: $O(N \times L \times R)$ where:
   - $N$ is total number of frontend template files.

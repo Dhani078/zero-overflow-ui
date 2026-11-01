@@ -1,8 +1,8 @@
-# Integration Guide
+**Integration Guide**
 
 How to integrate `zero-overflow-ui` into modern web development stacks.
 
-## 1. Next.js (App Router / Pages Router)
+**1. Next.js (App Router / Pages Router)**
 
 Add check to pre-build script in `package.json`:
 
@@ -15,7 +15,7 @@ Add check to pre-build script in `package.json`:
 }
 ```
 
-## 2. Vite / React / Vue / Svelte
+**2. Vite / React / Vue / Svelte**
 
 Run scanner during development linting:
 
@@ -29,7 +29,7 @@ Run scanner during development linting:
 }
 ```
 
-## 3. Astro
+**3. Astro**
 
 Ensure all `.astro` and markdown components respect viewport rules:
 
@@ -37,7 +37,7 @@ Ensure all `.astro` and markdown components respect viewport rules:
 npx zero-overflow scan src/pages/ src/components/
 ```
 
-## 4. Laravel Blade
+**4. Laravel Blade**
 
 Inspect all Blade template views for accidental rigid layout overflow:
 
@@ -45,7 +45,7 @@ Inspect all Blade template views for accidental rigid layout overflow:
 npx zero-overflow scan resources/views/
 ```
 
-## 5. GitHub Actions Workflow
+**5. GitHub Actions Workflow**
 
 Add `.github/workflows/viewport-guard.yml`:
 
@@ -70,7 +70,7 @@ jobs:
         run: npx zero-overflow scan src/
 ```
 
-## 6. GitLab CI
+**6. GitLab CI**
 
 Add to `.gitlab-ci.yml`:
 

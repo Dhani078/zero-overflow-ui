@@ -5,11 +5,11 @@ version: 1.0.1
 author: Dhani078
 ---
 
-# Zero Overflow UI Skill
+**Zero Overflow UI Skill**
 
 Use when developing or reviewing frontend code (React, Vue, Svelte, HTML, Astro, Blade) to ensure 0 horizontal scrollbar leaks on mobile viewports (<360px).
 
-## Instructions
+**Instructions**
 
 1. Before claiming any UI change is complete, run:
    ```bash

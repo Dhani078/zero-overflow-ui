@@ -1,4 +1,4 @@
-# Framework Compatibility Matrix: zero-overflow-ui
+**Framework Compatibility Matrix: zero-overflow-ui**
 
 Compatibility verification across modern web frameworks and templating languages.
 
@@ -12,7 +12,7 @@ Compatibility verification across modern web frameworks and templating languages
 | **Laravel Blade** | `.blade.php` | **Full** | Verified (v1.0.1) | Handles Blade template directives and HTML elements. |
 | **Plain HTML / Web Components** | `.html`, `.htm` | **Full** | Verified (v1.0.1) | Scans static HTML pages and web component templates. |
 
-## Unsupported File Types (By Design)
+**Unsupported File Types (By Design)**
 
 - `.css`, `.scss`, `.less` (Global stylesheets without markup context).
 - `.json`, `.yaml` (Configuration data).

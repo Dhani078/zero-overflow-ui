@@ -1,8 +1,8 @@
-# Security Model: zero-overflow-ui
+**Security Model: zero-overflow-ui**
 
 Threat modeling and defensive design principles of `zero-overflow-ui`.
 
-## 1. Threat Vectors Considered
+**1. Threat Vectors Considered**
 
 | Threat Vector | Risk Level | Mitigation Strategy |
 | :--- | :--- | :--- |
@@ -11,7 +11,7 @@ Threat modeling and defensive design principles of `zero-overflow-ui`.
 | **Memory Exhaustion on Massive Files** | Low | Single-pass line splitting. Large binary assets (`.png`, `.jpg`, `.pdf`) are excluded by file extension whitelist. |
 | **Supply Chain Compromise** | Critical | **Zero runtime dependencies**. The package relies exclusively on Node.js core modules. |
 
-## 2. ReDoS Verification Table
+**2. ReDoS Verification Table**
 
 Each regex in `src/rules.js` undergoes strict complexity profiling:
 
