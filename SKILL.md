@@ -1,7 +1,7 @@
 ---
 name: zero-overflow-ui
 description: Detect and eliminate mobile horizontal overflow, viewport leakage, and rigid widths in frontend code.
-version: 1.0.0
+version: 1.0.1
 author: Dhani078
 ---
 

@@ -1,6 +1,9 @@
 name: "zero-overflow-ui action"
 description: "Scan frontend templates for mobile horizontal overflow and viewport leakage"
 author: "Dhani078"
+branding:
+  icon: "smartphone"
+  color: "blue"
 inputs:
   path:
     description: "Directory or file to scan"

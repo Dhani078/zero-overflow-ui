@@ -1,6 +1,6 @@
 {
   "name": "zero-overflow-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Static code scanner preventing mobile horizontal overflow and viewport leakage in frontend code.",
   "type": "module",
   "main": "src/index.js",
