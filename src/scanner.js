@@ -61,11 +61,10 @@ export function scanDirectory(dirPath, config = {}) {
   function traverse(currentDir) {
     const entries = fs.readdirSync(currentDir, { withFileTypes: true });
     for (const entry of entries) {
+      if (ignoreSet.has(entry.name)) continue;
       const fullPath = path.join(currentDir, entry.name);
       if (entry.isDirectory()) {
-        if (!ignoreSet.has(entry.name)) {
-          traverse(fullPath);
-        }
+        traverse(fullPath);
       } else if (entry.isFile()) {
         const ext = path.extname(entry.name);
         if (DEFAULT_EXTS.has(ext) || entry.name.endsWith(".blade.php")) {

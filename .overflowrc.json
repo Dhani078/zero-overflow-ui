@@ -2,6 +2,8 @@
   "ignoreRules": [],
   "ignorePaths": [
     "examples",
+    "playground.html",
+    "index.html",
     "dist",
     "build",
     ".next"

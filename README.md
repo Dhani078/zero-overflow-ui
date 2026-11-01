@@ -1,6 +1,7 @@
 # zero-overflow-ui
 
 [![GitHub Release](https://img.shields.io/github/v/release/Dhani078/zero-overflow-ui?color=blue)](https://github.com/Dhani078/zero-overflow-ui/releases)
+[![Live Demo](https://img.shields.io/badge/demo-live%20playground-success.svg)](https://dhani078.github.io/zero-overflow-ui/)
 [![CI Status](https://github.com/Dhani078/zero-overflow-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/Dhani078/zero-overflow-ui/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D20.0.0-green.svg)](https://nodejs.org/)
@@ -14,8 +15,9 @@ Zero dependencies. Instant scan. Compatible with Tailwind CSS, plain CSS, React,
 
 ## Interactive Browser Playground
 
-Test snippets in your browser with real-time viewport analysis:
-- Open [`playground.html`](playground.html) locally in any web browser.
+Test snippets directly in your browser with real-time viewport analysis:
+- **Live Web App**: [https://dhani078.github.io/zero-overflow-ui/](https://dhani078.github.io/zero-overflow-ui/)
+- Local file: Open [`playground.html`](playground.html) in any browser.
 
 ---
 
