@@ -4,12 +4,14 @@
   "description": "Static code scanner preventing mobile horizontal overflow and viewport leakage in frontend code.",
   "type": "module",
   "main": "src/index.js",
+  "types": "index.d.ts",
   "bin": {
     "zero-overflow": "bin/zero-overflow.js"
   },
   "files": [
     "bin",
     "src",
+    "index.d.ts",
     "SKILL.md",
     "README.md",
     "LICENSE"
