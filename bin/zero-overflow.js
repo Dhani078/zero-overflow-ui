@@ -2,7 +2,7 @@
 
 import path from "node:path";
 import fs from "node:fs";
-import { scanFile, scanDirectory } from "../src/scanner.js";
+import { scanFile, scanDirectory, loadConfig } from "../src/scanner.js";
 
 const args = process.argv.slice(2);
 const command = args[0] || "scan";
@@ -30,12 +30,13 @@ if (!fs.existsSync(resolvedPath)) {
   process.exit(1);
 }
 
+const config = loadConfig(process.cwd());
 const stat = fs.statSync(resolvedPath);
 console.log(`\nScanning for viewport overflow in: ${resolvedPath}`);
 
 const issues = stat.isDirectory()
-  ? scanDirectory(resolvedPath)
-  : scanFile(resolvedPath);
+  ? scanDirectory(resolvedPath, config)
+  : scanFile(resolvedPath, config);
 
 if (issues.length === 0) {
   console.log("\x1b[32m✔ 0 horizontal overflow issues detected. Clean viewport.\x1b[0m\n");

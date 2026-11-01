@@ -1,0 +1,22 @@
+name: Feature Request
+description: Propose a new CSS/Tailwind rule or improvement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: Share your ideas for expanding zero-overflow-ui.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What viewport overflow issue or edge case do you encounter?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution / Rule
+      description: How should zero-overflow detect and flag this?
+    validations:
+      required: true
