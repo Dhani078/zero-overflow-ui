@@ -1,23 +1,29 @@
-name: Bug Report
-description: Report a false positive, false negative, or runtime error in zero-overflow-ui
-title: "[Bug]: "
+name: Bug report
+description: Create a report to help us improve zero-overflow-ui
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
-      value: Thank you for reporting an issue! Please provide the minimal template snippet below.
-  - type: textarea
-    id: snippet
+      value: Thanks for contributing! Please fill out the details below.
+  - type: input
+    id: version
     attributes:
-      label: Problematic Template Code
-      description: The HTML/JSX/Vue/Svelte snippet causing the issue.
-      placeholder: "<div class='w-screen'>...</div>"
+      label: Version
+      placeholder: 1.0.0
     validations:
       required: true
   - type: textarea
-    id: expected
+    id: what-happened
     attributes:
-      label: Expected Behavior
-      description: What should zero-overflow have detected or ignored?
+      label: What happened?
+      description: Describe the false positive or scanner issue.
+    validations:
+      required: true
+  - type: textarea
+    id: code-snippet
+    attributes:
+      label: Code snippet
+      description: The HTML/JSX/Tailwind code that caused the issue.
+      render: html
     validations:
       required: true
