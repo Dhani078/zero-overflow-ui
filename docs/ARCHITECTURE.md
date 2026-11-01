@@ -4,35 +4,43 @@
 
 `zero-overflow-ui` is built with a zero-dependency static analysis architecture. It parses frontend templates line-by-line, matching layout-breaking CSS declarations and Tailwind utility classes against a deterministic violation taxonomy.
 
-```
-                    ┌──────────────────────────┐
-                    │     Frontend Source      │
-                    │ (.html, .tsx, .vue, ...) │
-                    └─────────────┬────────────┘
-                                  │
-                                  ▼
-                    ┌──────────────────────────┐
-                    │    File Traversal &      │
-                    │    Line Tokenizer        │
-                    └─────────────┬────────────┘
-                                  │
-                                  ▼
-                    ┌──────────────────────────┐
-                    │      Rules Engine        │
-                    │   (Deterministic RegEx)  │
-                    └─────────────┬────────────┘
-                                  │
-                                  ▼
-                    ┌──────────────────────────┐
-                    │      Violation Triage    │
-                    │    (ERROR vs WARNING)    │
-                    └─────────────┬────────────┘
-                                  │
-                                  ▼
-                    ┌──────────────────────────┐
-                    │   CLI Reporter & CI Exit │
-                    │     (Exit Code 0 / 1)    │
-                    └──────────────────────────┘
+## System Architecture Diagram
+
+```mermaid
+flowchart TD
+    A[Frontend Source Files<br/>.html, .jsx, .tsx, .vue, .svelte, .astro, .blade.php] --> B[File Traversal Engine]
+    B --> C{Directory / File?}
+    C -->|Ignored Path| D[Skip node_modules, dist, etc.]
+    C -->|Valid File| E[Line Tokenizer & Filter]
+    E --> F[Comment Stripper<br/>//, /*, &lt;!--]
+    F --> G[Rules Engine]
+    
+    subgraph Rules Engine
+        G1[w-screen Viewport Leak]
+        G2[Fixed Width >= 360px]
+        G3[Flex Truncate without min-w-0]
+        G4[Unwrapped Table / Pre Element]
+        G5[Unconstrained Negative Margin]
+    end
+    
+    G --> G1
+    G --> G2
+    G --> G3
+    G --> G4
+    G --> G5
+    
+    G1 --> H[Issue Collector]
+    G2 --> H
+    G3 --> H
+    G4 --> H
+    G5 --> H
+    
+    H --> I{Severity Classifier}
+    I -->|ERROR| J[Exit Code 1<br/>Breaks CI]
+    I -->|WARNING| K[Exit Code 0<br/>Advisory Alert]
+    
+    J --> L[CLI Output / JSON Reporter]
+    K --> L
 ```
 
 ## Core Design Decisions
